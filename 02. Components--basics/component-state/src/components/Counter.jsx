@@ -9,7 +9,7 @@ export default function Counter () {
     // let setCount = stateArr[1]
 
     setTimeout(() => {
-        setCount(count + 1)
+        setCount(oldState => oldState + 1)
     }, 1000);
 
 
