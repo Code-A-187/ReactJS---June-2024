@@ -12,7 +12,7 @@ export default function KillCounter(props) {
         title  = 'Double Kill!';
     }
 
-    if (props.count > 10) {
+    if (props.count >= 10) {
         title = 'GodLike'
     } else if (props.count > 5) {
         title = 'Unstoppable!';

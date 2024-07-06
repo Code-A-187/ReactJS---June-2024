@@ -19,13 +19,15 @@ export default function Counter() {
 
     let countText = `Positive ${count}`;
     let color = 'green'
-    let counterClassName = 'positive-text'
 
     if (count < 0) {
         countText = `Negative ${count}`;
         color = 'red'
-        counterClassName = 'negative-text'
     }
+
+    const enableIncrementButton = count < 10; 
+
+
 
     return (
         <>
@@ -40,7 +42,7 @@ export default function Counter() {
 
             <button onClick={decrementButtonClickHandler}>-</button>
             <button onClick={resetButtonClickHandler}>0</button>
-            <button onClick ={incrementButtonClickHandler}>+</button>
+            {enableIncrementButton && <button onClick ={incrementButtonClickHandler}>+</button>}
         </>
     )
 }
