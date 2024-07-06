@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { useState } from "react"
 
-export default function Counter () {
 
-    const [count, setCount] = useState(0)  // Read only
-    
-    // console.log(stateArr)
-    // let count = stateArr[0]
-    // let setCount = stateArr[1]
+export default function Counter() {
+    const [count, setCount] = useState(0);
 
-    setTimeout(() => {
-        setCount(oldState => oldState + 1)
-    }, 1000);
-
+    const incrementButtonClickHandler = () => {
+        console.log('click')
+    }
 
     return (
         <>
             <h2>Counter</h2>
 
-            <p>{count}</p>
+            <p>0</p>
+
+            <button onClick={incrementButtonClickHandler}>+</button>
+        
         </>
     )
 }
