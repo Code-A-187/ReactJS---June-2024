@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './Counter.css'
+import KillCounter from "./KillCounter";
 
 export default function Counter() {
     const [count, setCount] = useState(0);
@@ -29,6 +30,8 @@ export default function Counter() {
     return (
         <>
             <h2>Counter</h2>
+
+            <KillCounter count={count}/>
 
             <p style={{color}} className={count < 0 ? 'negative-text' :'positive-text'}
             > 

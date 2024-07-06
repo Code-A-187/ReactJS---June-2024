@@ -7,7 +7,7 @@ function App() {
     <>
 
       <Timer />
-
+      
       <Counter />
 
     </>
