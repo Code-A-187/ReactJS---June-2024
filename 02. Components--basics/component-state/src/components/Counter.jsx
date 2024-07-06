@@ -5,17 +5,26 @@ export default function Counter() {
     const [count, setCount] = useState(0);
 
     const incrementButtonClickHandler = () => {
-        console.log('click')
+        setCount (oldCount => oldCount + 1);
+    }
+
+    const resetButtonClickHandler =  () => {
+        setCount(0)
+    }
+
+    const decrementButtonClickHandler = () => {
+        setCount(oldCount => oldCount- 1);
     }
 
     return (
         <>
             <h2>Counter</h2>
 
-            <p>0</p>
+            <p>{count}</p>
 
-            <button onClick={incrementButtonClickHandler}>+</button>
-        
+            <button onClick={decrementButtonClickHandler}>-</button>
+            <button onClick={resetButtonClickHandler}>0</button>
+            <button onClick ={incrementButtonClickHandler}>+</button>
         </>
     )
 }
