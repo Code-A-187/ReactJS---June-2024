@@ -46,5 +46,20 @@
       "street": "456 Elm St",
       "streetNumber": "7"
     }
-  }
+  }, "b779ca22-a959-4992-af0e-59ef114c626a": {
+        "firstName": "Pancho",
+        "lastName": "Stanchev",
+        "email": "pancho@gmail.com",
+        "phoneNumber": "0899999333",
+        "createdAt": "2024-07-01T07:22:00.358Z",
+        "updatedAt": "2024-07-01T07:22:00.358Z",
+        "imageUrl": "https://media.licdn.com/dms/image/D4D03AQFN0RBXWvTajg/profile-displayphoto-shrink_400_400/0/1719055693379?e=1726099200&v=beta&t=vSKN7muww8cAtJuCth1crB3woHD4wQVs-wUsHat8OZQ",
+        "address": {
+            "country": "България",
+            "city": "Русе",
+            "street": "Юндола 10",
+            "streetNumber": "21"
+        },
+        "_id": "b779ca22-a959-4992-af0e-59ef114c626a"
+    }
 }
