@@ -6,7 +6,7 @@ export default function UserListItem({user}) {
         <tr>
             <td>
                 <img src= { user.imageUrl }
-                alt="Peter's profile" className="image" />
+                alt={`${user.firstName}'s profile`} className="image" />
             </td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
