@@ -1,10 +1,11 @@
 export default function CreateUser({ 
     onClose,
+    onSave,
 }) {
 
   return (  
         <div className="overlay">
-        <div className="backdrop"></div>
+        <div className="backdrop" onClick={onClose}></div>
         <div className="modal">
             <div className="user-container">
             <header className="headers">
@@ -18,7 +19,7 @@ export default function CreateUser({
                 </svg>
                 </button>
             </header>
-            <form>
+            <form onSubmit={onSave}>
                 <div className="form-row">
                 <div className="form-group">
                     <label htmlFor="firstName">First name</label>
