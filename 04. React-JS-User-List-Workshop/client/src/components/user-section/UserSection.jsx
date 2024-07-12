@@ -13,17 +13,20 @@ export default function UserSection () {
     const [showAddUser, setShowAddUser] = useState(false);
     const [showUserDetailsById, setshowUserDetailsById] = useState(null)
     const [showUserDeleteById, setshowUserDeleteById] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    
     useEffect (() => {
         (async function getUsers(){
             try {
                 const response = await fetch(`${baseUrl}/users`);
                 const result = await response.json();
                 const usersData = Object.values(result)
-                
                 setUsers(usersData);
                 
             } catch (error) {
                 console.log(error.message)
+            } finally{
+                setIsLoading(false);
             }
         })();
     }, []);
@@ -39,6 +42,9 @@ export default function UserSection () {
     const addUserSaveHandler = async (e) => {
         // prevent refresh
         e.preventDefault();
+
+        // start spinner
+        setIsLoading(true);
 
         // get user date
         const formData = new FormData(e.currentTarget)
@@ -68,6 +74,9 @@ export default function UserSection () {
         // close modal
 
         setShowAddUser(false);
+
+        // Stop Spinner
+        setIsLoading(false);
     }
 
     const userDetailsClickHandler = (userId) => {
@@ -94,6 +103,7 @@ export default function UserSection () {
 
     }
 
+
   return (
         <section className="card users-container">
 
@@ -101,8 +111,10 @@ export default function UserSection () {
 
             <UserList 
                 users={users}
+                isLoading={isLoading}
                 onUserDetailsClick={userDetailsClickHandler}
                 onUserDeleteClick={userDeleteClickHandler}
+                
             />
 
             {showAddUser && <CreateUser 

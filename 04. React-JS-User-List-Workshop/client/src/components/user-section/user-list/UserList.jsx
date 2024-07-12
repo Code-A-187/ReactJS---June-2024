@@ -1,19 +1,18 @@
+import Spinner from "../../spinner/Spinner";
 import UserListItem from "./user-list-item/UserListItem";
 
 export default function UserList({ 
     users,
+    isLoading,
     onUserDetailsClick,
     onUserDeleteClick,
  }) {
   return (
 
         <div className="table-wrapper">
-        
-        {/* <!-- Overlap components  --> */}
 
-        {/* <!-- <div className="loading-shade"> -->
-        {/* <!-- Loading spinner  --> */}
-        {/* <!-- <div className="spinner"></div> --> */}
+        {isLoading && <Spinner />}
+                    
         {/* <!-- No users added yet  --> */}
 
         {/* <!-- <div className="table-overlap">
@@ -76,7 +75,7 @@ export default function UserList({
             </svg>
             <h2>Failed to fetch</h2>
             </div> -->
-        <!-- </div> --> */}
+        </div> --> */}
 
         <table className="table">
         <thead>
