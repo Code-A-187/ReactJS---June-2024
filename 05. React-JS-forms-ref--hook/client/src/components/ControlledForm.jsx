@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 export default function ControlledForm() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('');
     const [formValues, setFormValues] = useState({
         username: '',
         password: '',
+        email: '',
+        age: '',
     });
+
     useEffect(() => {
         (async () => {
             const response = await fetch('http://localhost:3030/jsonstore/advanced/profiles/fb352199-bcbc-4e1d-a1dc-ed346a6fb49a');
@@ -20,11 +21,11 @@ export default function ControlledForm() {
         e.preventDefault();
     }
 
-    const usernameChangeHandler= (e) => {
-        setUsername (e.target.value);
+    const  changeHandler = (e) => {
+        setFormValues(oldValues => ({
+            ...oldValues, [e.target.name]: e.target.value
+        }))
     }
-
-    const 
     
     return (
         <>  
@@ -36,8 +37,9 @@ export default function ControlledForm() {
                             type="text" 
                             name='username' 
                             id='username' 
-                            value={username}
-                            onChange={changeHansler}
+                            placeholder="Jane Doe"
+                            value={formValues.username}
+                            onChange={changeHandler}
                         />
                     </div>
     
@@ -47,8 +49,34 @@ export default function ControlledForm() {
                             type="password" 
                             name='password' 
                             id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="*******"
+                            value={formValues.password}
+                            onChange={changeHandler}
+                        />
+                    </div>
+
+                    
+                    <div>
+                        <label htmlFor="email">E-mail</label>
+                        <input 
+                            type="email" 
+                            name='email' 
+                            id="email"
+                            placeholder="jane.doe@gmail.com"
+                            value={formValues.email}
+                            onChange={changeHandler}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="age">E-mail</label>
+                        <input 
+                            type="number" 
+                            name='age' 
+                            id="age"
+                            placeholder="18"
+                            value={formValues.age}
+                            onChange={changeHandler}
                         />
                     </div>
     
