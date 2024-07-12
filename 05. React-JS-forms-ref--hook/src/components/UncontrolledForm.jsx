@@ -16,6 +16,11 @@ export default function UncontrolledForm() {
     const logoutHandler = () => {
         setUser({})
     }
+
+    const usernameInputHandler =(e) => {
+        console.log(e.target.value)
+    }
+    
     return (
         <>  
             <h1>Uncotrolled Form</h1>
@@ -25,7 +30,7 @@ export default function UncontrolledForm() {
                     <form onSubmit={formSubmitHandler}>
                     <div>
                         <label htmlFor="username">Username</label>
-                        <input type="text" name='username' id='username'/>
+                        <input type="text" name='username' id='username' onInput={usernameInputHandler}/>
                     </div>
     
                     <div>
