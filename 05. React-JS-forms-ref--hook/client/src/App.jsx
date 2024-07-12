@@ -1,14 +1,17 @@
 import './App.css'
-import ControlledForm from './components/ControlledForm'
-import UncontrolledForm from './components/UncontrolledForm'
-
+// import ControlledForm from './components/ControlledForm'
+// import UncontrolledForm from './components/UncontrolledForm'
+// import RefDemo from './components/RefDemo'
+import TailWindDemo from './components/TailWindDemo'
 function App() {
   
   return (
     <>
-        <UncontrolledForm />
 
+        <TailWindDemo />
+        {/* <UncontrolledForm />
         <ControlledForm />
+        <RefDemo /> */}
     </>
   )
 }

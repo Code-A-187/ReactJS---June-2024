@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function ControlledForm() {
     const [formValues, setFormValues] = useState({
@@ -6,16 +6,27 @@ export default function ControlledForm() {
         password: '',
         email: '',
         age: '',
+        bio: '',
+        occupation: 'QA',
+        sex: 'f',
+        sports: '',
     });
 
-    useEffect(() => {
-        (async () => {
-            const response = await fetch('http://localhost:3030/jsonstore/advanced/profiles/fb352199-bcbc-4e1d-a1dc-ed346a6fb49a');
-            const profile = await response.json();
+    const inputRef = useRef();
+
+    useEffect (() => {
+        inputRef.current.focus()
+    }, [])
+
+
+    // useEffect(() => {
+    //     (async () => {
+    //         const response = await fetch('http://localhost:3030/jsonstore/advanced/profiles/fb352199-bcbc-4e1d-a1dc-ed346a6fb49a');
+    //         const profile = await response.json();
         
-            setUsername(profile.username)
-        })();
-    }, []);
+    //         setUsername(profile.username)
+    //     })();
+    // }, []);
     
     const formSubmitHandler = (e) => {
         e.preventDefault();
@@ -23,8 +34,10 @@ export default function ControlledForm() {
 
     const  changeHandler = (e) => {
         setFormValues(oldValues => ({
-            ...oldValues, [e.target.name]: e.target.value
-        }))
+            ...oldValues, [e.target.name]: e.target.type === 'checkbox'
+                ? e.target.checked
+                : e.target.value,
+        }));
     }
     
     return (
@@ -34,7 +47,8 @@ export default function ControlledForm() {
                     <div>
                         <label htmlFor="username">Username</label>
                         <input 
-                            type="text" 
+                            type="text"
+                            ref={inputRef}
                             name='username' 
                             id='username' 
                             placeholder="Jane Doe"
@@ -69,13 +83,78 @@ export default function ControlledForm() {
                     </div>
 
                     <div>
-                        <label htmlFor="age">E-mail</label>
+                        <label htmlFor="age">Age</label>
                         <input 
                             type="number" 
                             name='age' 
                             id="age"
                             placeholder="18"
                             value={formValues.age}
+                            onChange={changeHandler}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="bio">Bio</label>
+                        <textarea 
+                            name='bio' 
+                            id="bio"
+                            value={formValues.bio}
+                            onChange={changeHandler}
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="occupation">Occupation</label>
+                        <select 
+                            name="occupation" 
+                            id="occupation"
+                            value={formValues.occupation}
+                            onChange={changeHandler}                        >
+                            <option value="qa">QA</option>
+                            <option value="it">IT</option>
+                            <option value="dc">DC</option>
+                            <option value="hr">HR</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="sex-m">Male</label>
+                        <input 
+                            type="radio" 
+                            name="sex" 
+                            id="sex-m"
+                            value='m'
+                            checked={formValues.sex === 'm'}
+                            onChange={changeHandler}
+                        />
+                        <label htmlFor="sex-f">Female</label>
+                         <input 
+                            type="radio" 
+                            name="sex" 
+                            id="sex-f"
+                            value={formValues.sex === 'f'}
+                            onChange={changeHandler}
+                        />
+                    </div>
+
+
+                    <div>
+                        <label htmlFor="swimming">Swimming</label>
+                        <input 
+                            type="checkbox" 
+                            name='swimming' 
+                            id="swimming"
+                            value={formValues.sports}
+                            onChange={changeHandler}
+                        />
+
+                        <label htmlFor="fittnes">Fittnes</label>
+                        <input 
+                            type="checkbox" 
+                            name='fittnes' 
+                            id="fittnes"
+                            value={formValues.sports}
                             onChange={changeHandler}
                         />
                     </div>
