@@ -1,11 +1,8 @@
-import Header from './Header'
+
 
 export default function Home() {
-  return (
-    <div className="bg-white">
+  return (    
         
-        <Header />
-
         <div className="relative isolate px-6 pt-14 lg:px-8">
             <div
             aria-hidden="true"
@@ -63,6 +60,6 @@ export default function Home() {
             />
             </div>
         </div>
-    </div>
+
   )
 }
