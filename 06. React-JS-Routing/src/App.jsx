@@ -1,5 +1,11 @@
-import Home from "./components/Home"
-import Header from './components/Header'
+import { Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+import Home from "./components/Home";
+import Pricing from './components/Pricing';
+import About from './components/About';
+import NotFound from './components/NotFound';
+
 
 function App() {
   
@@ -8,8 +14,13 @@ function App() {
 		<div className="bg-white">	
 
 			<Header />
-			
-			<Home />
+
+			<Routes>
+				<Route path="/" element={<Home />}/>
+				<Route path="/about" element={<About />}/>
+				<Route path="/pricing" element={<Pricing />}/> 
+				<Route path="*" element={<NotFound/>}></Route>
+			</Routes>
 
 		</div>
   )
