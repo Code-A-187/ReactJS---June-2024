@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import gamesApi from "../../api/games-api"
+import { useEffect, useState } from "react";
+import * as gamesApi from "../../api/games-api"
 
 export default function AllGames() {
     const [games, setGames] = useState([]);
