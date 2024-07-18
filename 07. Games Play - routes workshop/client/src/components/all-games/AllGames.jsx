@@ -1,5 +1,14 @@
+import { useEffect } from "react";
+import gamesApi from "../../api/games-api"
+
 export default function AllGames() {
-  return (
+    const [games, setGames] = useState([]);
+    
+    useEffect(() => {
+        gamesApi.getAll(). then(result => setGames(result));
+    }, []);
+
+    return (
         <section id="catalog-page">
                 <h1>All Games</h1>
                 {/* <!-- Display div: with information about every game (if any) --> */}
@@ -33,5 +42,5 @@ export default function AllGames() {
                 {/* <!-- Display paragraph: If there is no games  --> */}
                 <h3 class="no-articles">No articles yet</h3>
         </section>
-   );
+    );
 }
