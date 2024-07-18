@@ -7,6 +7,7 @@ export default function AllGames() {
     
     useEffect(() => {
         gamesApi.getAll().then(result => setGames(result));
+
     }, []);
 
     return (

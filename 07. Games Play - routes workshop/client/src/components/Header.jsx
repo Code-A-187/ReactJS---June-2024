@@ -5,10 +5,10 @@ export default function Header() {
         <header>
                 <h1><Link class="home" to="/">GamesPlay</Link></h1>
             <nav>
-                <Link to="/catalog">All games</Link>
+                <Link to="/games">All games</Link>
                 
                 <div id="user">
-                    <Link to="/create">Create Game</Link>
+                    <Link to="games/create">Create Game</Link>
                     <Link to="/logout">Logout</Link>
                 </div>
                     <div id="guest">
