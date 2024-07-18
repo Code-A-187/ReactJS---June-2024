@@ -31,7 +31,8 @@ const commentSubmitHandler = async (e) => {
             [newComment._id]: newComment,
         }
     }));
-
+    setUsername('')
+    setComment('')
 }
   return (
         <section id="game-details">
@@ -52,14 +53,18 @@ const commentSubmitHandler = async (e) => {
                 {/* <!-- Bonus ( for Guests and Users ) --> */}
                 <div className="details-comments">
                     <h2>Comments:</h2>
-                    <ul>
-                        {game.comments && Object.values(game.comments).map(comment => (
-                            <li key = {comment._id} className="comment">
-                                <p>{comment.username}: {comment.text}</p>
-                            </li>))
-                            // <p className="no-comment">No comments.</p>
+                    <ul> 
+                        {Object.keys(game.comments || {}).length >0 
+                            ?   Object.values(game.comments).map(comment => (
+                                
+                                    <li  key = {comment._id}className="comment">
+                                        <p>{comment.username}: {comment.text}</p>
+                                    </li>
+                                
+                            ))
+                            : <p className="no-comment">No comments.</p>
                         }
-                    </ul>
+                    </ul>   
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
