@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import gamesAPI from "../../api/games-api";
 import { useParams } from "react-router-dom";
+import commentsApi from "../../api/comments-api";
 
 export default function DetailsGame() {
     const [game, setGame] = useState({});
+    const [username, setUsername] = useState('');
+    const [comment, setComment] = useState('');
     const { gameId } = useParams();
 
     useEffect(() => {
@@ -14,6 +17,14 @@ export default function DetailsGame() {
         })();
 
     }, []);
+
+const commentSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    await commentsApi.create(gameId, username, comment)
+
+
+}
 
 
   return (
@@ -59,8 +70,22 @@ export default function DetailsGame() {
             <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
+                <form className="form" onSubmit={commentSubmitHandler}>
+                    <input 
+                        type="text" 
+                        placeholder='Pesho' 
+                        name='username'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <textarea 
+                        name="comment" 
+                        placeholder="Comment......"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    ></textarea>
+
                     <input className="btn submit" type="submit" value="Add Comment"/>
                 </form>
             </article>
