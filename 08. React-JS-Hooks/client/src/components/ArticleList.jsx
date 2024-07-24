@@ -13,7 +13,7 @@ export default function ArticleList() {
 		data: articles, 
 		isFetching, 
 		refetch, 
-	} = useFetch('http://localhost:3030/jsonstore/advanced/articles/list', [])
+	} = useFetch('http://localhost:3030/jsonstore/advanced/articles/details', [])
 
   return (
     <>
@@ -21,11 +21,10 @@ export default function ArticleList() {
             ? <Spiner />
             : (
                 <div className={styles['article-list']}>
-                    {articles.map(article => <ArticleCard key={article._id} {...article} />) }
+                    {Object.values(articles).map(article => <ArticleCard key={article._id} {...article} />) }
                 </div>
             )
         }
-
         <Button variant="primary" onClick={refetch}>Refresh</Button>
     </>
     
