@@ -1,30 +1,33 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useForm } from '../hooks/useForm';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/userContext';
+
 
 export default function ArticleCreate() {
     const navigate = useNavigate();
-    
+    const { user } = useContext(UserContext);
+
     const initialFormValues = {
         title: '',
         content: '',
     }
 
-    const formSubmitHandler = (values) => {
-        (async () => {
+    const formSubmitHandler = async (values) => {
+        
             const response = await fetch('http://localhost:3030/jsonstore/advanced/articles/details', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values),
+                body: JSON.stringify({ ...values, author: user.username }),
             });
 
             const result = await response.json();
 
-            navigate(`/articles/${result._id}/details`);
-        })();
-           
+            navigate(`/articles/${result._id}/details`); 
     };
     
     const { values, changeHandler, submitHandler } = useForm(initialFormValues, formSubmitHandler)

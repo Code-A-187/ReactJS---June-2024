@@ -6,11 +6,24 @@ import ArticleList from './components/ArticleList';
 import ArticleCreate from './components/ArticleCreate';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
+import UserContext from './contexts/userContext';
+import FakeLogin from './components/FakeLogin';
+
+
 
 function App() {
+	const [currentUser, setCurrentUser] = useState({});
+	const login = (username, password) => {
+		// TODO: validate password
+
+		setCurrentUser({ username })
+	}
+
+
 	
 	return (
-		<>
+		<UserContext.Provider value={{ user: currentUser, login }}>
 			<Navbar />
 
 			<Routes>
@@ -18,8 +31,9 @@ function App() {
 				<Route path='/articles' element={<ArticleList />} />
 				<Route path='/articles/:articleId/details' element={<Article />} />
 				<Route path='/articles/create' element={<ArticleCreate />} />
+				<Route path='/fake-login' element={<FakeLogin />} />
 			</Routes>
-		</>
+		</UserContext.Provider>
   )
 }
 
