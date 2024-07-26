@@ -1,16 +1,53 @@
+import { useNavigate } from 'react-router-dom'
+import { useLogin } from "../../hooks/useAuth";
+import { useForm } from "../../hooks/useForm";
+
+const initialValues = { email: '', password: ''}
+
 export default function UserLogin() {
+    const navigate = useNavigate();
+    const login = useLogin();
+
+    const loginHandler = async ({ email, password }) => {
+            try {
+                await login(email, password)
+                navigate('/')
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
+    
+    const { 
+        values, 
+        changeHandler, 
+        submitHandler 
+        } = useForm (initialValues , loginHandler);
+
   return (
 
         <section id="login-page" className="auth">
-            <form id="login">
+            <form id="login" onSubmit={submitHandler}>
                 <div className="container">
                     <div className="brand-logo"></div>
                     <h1>Login</h1>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Sokka@gmail.com"/>
+                    <label htmlFor="email">Email:</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        value={values.email}
+                        onChange={changeHandler}
+                        placeholder="Sokka@gmail.com"
+                    />
 
-                    <label for="login-pass">Password:</label>
-                    <input type="password" id="login-password" name="password"/>
+                    <label htmlFor="login-pass">Password:</label>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        name="password"
+                        value={values.password}
+                        onChange={changeHandler}
+                    />
                     <input type="submit" className="btn submit" value="Login"/>
                     <p className="field">
                         <span>If you don't have profile click <a href="#">here</a></span>
@@ -18,7 +55,5 @@ export default function UserLogin() {
                 </div>
             </form>
         </section>
-        
-       
    );
 }

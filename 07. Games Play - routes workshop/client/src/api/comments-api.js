@@ -18,7 +18,9 @@ const getAll = async  (gameId) =>{
 
 
 
-export default {
+const commnetsAPI = {
     create,
     getAll,
 }
+
+export default commnetsAPI
