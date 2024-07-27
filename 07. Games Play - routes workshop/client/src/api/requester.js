@@ -11,11 +11,19 @@ async function requester(method, url, data) {
         }
         options.body = JSON.stringify(data)
     }
-    
+   
     const response = await fetch(url, options);
-    const result = response.json()
+    const result = await response.json()
+
+    if (!response.ok) {
+        console.log(response);
+        throw result;
+    }
+
+    
 
     return result;
+
 };
 
 export const get = requester.bind(null, 'GET');
