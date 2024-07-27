@@ -7,10 +7,24 @@ import Home from "./components/home/Home"
 import UserLogin from "./components/user-login/UserLogin"
 import UserRegister from "./components/user-register/UserRegister"
 import DetailsGame from './components/details-game/DetailsGame'
+import { useState } from 'react';
+import { AuthContext } from './contexts/auth-context';
 
 function App() {
+  const [authState, setAuthstate] = useState({})
+
+  const changeAuthState = (state) => {
+	setAuthstate(state);
+  }
+  const contextData = {
+	email: authState.email,
+	accessToken: authState.accessToken,
+	isAuthenticated: !!authState.email,
+	changeAuthState,
+  };
 
   return (
+    <AuthContext.Provider value={contextData}>
     <div id="box">
 
       <Header />
@@ -27,6 +41,7 @@ function App() {
       </main>
       
     </div>
+    </AuthContext.Provider>
   )
 }
 
