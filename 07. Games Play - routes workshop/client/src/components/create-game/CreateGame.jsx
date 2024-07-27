@@ -18,7 +18,7 @@ export default function CreateGame() {
         try {
             const { _id: gameId } =  await createGame(values);
 
-            navigate(`/game/${gameId}/details`)
+            navigate(`/games/${gameId}/details`)
 
         } catch (err) {
             // TODO: Set error state and display error
