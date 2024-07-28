@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState} from "react";
+import usePersistedState from "../hooks/usePersistedState";
 
 export const AuthContext = createContext({
 	userId: '',
@@ -9,12 +10,13 @@ export const AuthContext = createContext({
 });
 
 export function AuthContextProvider(props) {
-	const [authState, setAuthstate] = useState({})
+	const [authState, setAuthstate] = usePersistedState('auth', {});
 
 
 	const changeAuthState = (state) => {
 		// TODO: Quick solution fix by implementing persisted authState
-		localStorage.setItem('accessToken', state.accessToken)
+		localStorage.setItem('accessToken', state.accessToken);
+
 		setAuthstate(state);
 	  }
 
@@ -33,8 +35,8 @@ export function AuthContextProvider(props) {
 	)
 }
 
-export function useAuthContext(AuthContext) {
-	const authData = useContext(AuthContext);
+export function useAuthContext() {
+    const authData = useContext(AuthContext);
 
-	return authData;
+    return authData;
 }

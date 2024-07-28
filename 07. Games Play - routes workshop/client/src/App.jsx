@@ -15,7 +15,7 @@ function App() {
     <AuthContextProvider>
         <div id="box">
 
-        <Header />
+            <Header />
 
             <main id="main-content">
                 <Routes>
