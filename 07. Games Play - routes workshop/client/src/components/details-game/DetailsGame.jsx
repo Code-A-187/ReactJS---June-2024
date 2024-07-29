@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetOneGames } from "../../hooks/useGames";
 import { useForm } from "../../hooks/useForm";
-import useCreateComment from "../../hooks/useComments";
+import { useCreateComment, useGetAllComments } from "../../hooks/useComments";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 const initialValues = {
@@ -12,6 +12,7 @@ const initialValues = {
 
 export default function DetailsGame() {
     const { gameId } = useParams();
+    const [comments, setComments] = useGetAllComments(gameId)
     const createComment = useCreateComment();
     const [game] = useGetOneGames(gameId);
     const { isAuthenticated } = useAuthContext();
@@ -43,17 +44,14 @@ export default function DetailsGame() {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul> 
-                        {/* {Object.keys(game.comments || {}).length >0 
-                            ?   Object.values(game.comments).map(comment => (
-                                
-                                    <li  key = {comment._id}className="comment">
-                                        <p>{comment.username}: {comment.text}</p>
-                                    </li>
-                                
+                        {comments.map(comment => (
+                            <li  key = {comment._id}className="comment">
+                                <p>Username: {comment.text}</p>
+                            </li>   
                             ))
-                            : <p className="no-comment">No comments.</p>
-                        } */}
-                    </ul>   
+                        }
+                    </ul>
+                    { comments.length === 0 && <p className="no-comment">No comments.</p> }
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
