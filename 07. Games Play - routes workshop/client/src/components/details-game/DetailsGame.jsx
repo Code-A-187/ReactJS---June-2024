@@ -1,31 +1,28 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetOneGames } from "../../hooks/useGames";
-import commentsApi from "../../api/comments-api";
+import { useForm } from "../../hooks/useForm";
+import useCreateComment from "../../hooks/useComments";
+import { useAuthContext } from "../../contexts/AuthContext";
+
+const initialValues = {
+    comment: '',
+}
+
+
 
 export default function DetailsGame() {
     const { gameId } = useParams();
-    const [username, setUsername] = useState('');
-    const [comment, setComment] = useState('');
-    const [game, setGame] = useGetOneGames(gameId)
-    
-const commentSubmitHandler = async (e) => {
-    e.preventDefault();
+    const createComment = useCreateComment();
+    const [game] = useGetOneGames(gameId);
+    const { isAuthenticated } = useAuthContext();
+        const {
+        changeHandler,
+        submitHandler,
+        values,
+    } = useForm(initialValues, ({ comment }) => {
+        createComment(gameId, comment)
+    });
 
-    const newComment = await commentsApi.create(gameId, username, comment)
-
-    // TODO: this should be refactored
-    setGame(prevState => ({
-        ...prevState,
-        comments: {
-            ...prevState.comments,
-            [newComment._id]: newComment,
-    
-        }
-    }));
-    setUsername('')
-    setComment('')
-}
   return (
         <section id="game-details">
             <h1>Game Details</h1>
@@ -46,7 +43,7 @@ const commentSubmitHandler = async (e) => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul> 
-                        {Object.keys(game.comments || {}).length >0 
+                        {/* {Object.keys(game.comments || {}).length >0 
                             ?   Object.values(game.comments).map(comment => (
                                 
                                     <li  key = {comment._id}className="comment">
@@ -55,41 +52,33 @@ const commentSubmitHandler = async (e) => {
                                 
                             ))
                             : <p className="no-comment">No comments.</p>
-                        }
+                        } */}
                     </ul>   
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
-                <div className="buttons">
-                    <a href="#" className="button">Edit</a>
-                    <a href="#" className="button">Delete</a>
-                </div>
+                    {/* <div className="buttons">
+                        <a href="#" className="button">Edit</a>
+                        <a href="#" className="button">Delete</a>
+                    </div> */}
             </div>
 
             {/* <!-- Bonus -->
             <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
-            <article className="create-comment">
+            {isAuthenticated && (<article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form" onSubmit={commentSubmitHandler}>
-                    <input 
-                        type="text" 
-                        placeholder='Pesho' 
-                        name='username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-
+                <form className="form" onSubmit={submitHandler}>
                     <textarea 
                         name="comment" 
                         placeholder="Comment......"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
+                        onChange={changeHandler}
+                        value={values.comment}
                     ></textarea>
 
                     <input className="btn submit" type="submit" value="Add Comment"/>
                 </form>
             </article>
-
+            )}
         </section>
    );
 }
