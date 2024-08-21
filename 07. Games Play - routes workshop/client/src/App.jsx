@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import AllGames from "./components/all-games/AllGames"
 import CreateGame from "./components/create-game/CreateGame"
 import Header from "./components/Header"
-import Home from "./components/home/Home"
+import Home from "../components/home/Home"
 import UserLogin from "./components/user-login/UserLogin"
 import Logout from './components/logout/Logout';
 import UserRegister from "./components/user-register/UserRegister"

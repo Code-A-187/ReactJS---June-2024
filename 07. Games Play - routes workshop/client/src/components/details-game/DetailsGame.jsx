@@ -13,7 +13,7 @@ const initialValues = {
 export default function DetailsGame() {
     const { gameId } = useParams();
     const [comments, dispatch] = useGetAllComments(gameId)
-    const { email, userId } = useAuthContext();
+    const { userId } = useAuthContext();
     const createComment = useCreateComment();
     const [game] = useGetOneGames(gameId);
     const { isAuthenticated } = useAuthContext();

@@ -14,6 +14,8 @@ export default function CreateGame() {
     const navigate = useNavigate();
     const createGame = useCreateGame();
 
+
+
     const createHandler = async (values) => {
         try {
             const { _id: gameId } =  await createGame(values);
@@ -30,6 +32,7 @@ export default function CreateGame() {
         changeHandler,
         submitHandler,
     } = useForm(initialValues, createHandler)
+    
     return (
         <section id="create-page" className="auth">
             <form id="create" onSubmit={submitHandler}>
